@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Zero_Hunger_Industry_Standard.Dtos.RestrurantDto>
+
+@{
+    ViewBag.Title = "GetRestrurantDetails";
+}
+
+<h2>GetRestrurantDetails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.intRestrurantId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strRestrurantName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strRestrurantType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.intRestrurantId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strRestrurantName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strRestrurantType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
