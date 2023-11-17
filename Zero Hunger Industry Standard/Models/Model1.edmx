@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_aa135e_ibos1234Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tblLog">
+        <EntityType Name="tblLogs">
           <Key>
             <PropertyRef Name="intAutoId" />
           </Key>
@@ -14,14 +14,14 @@
           <Property Name="intRowid" Type="bigint" />
           <Property Name="IntUserID" Type="bigint" />
         </EntityType>
-        <EntityType Name="tblNgo">
+        <EntityType Name="tblNgoes">
           <Key>
             <PropertyRef Name="intNgoId" />
           </Key>
           <Property Name="intNgoId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strNgoName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="TblRestrurantHeader">
+        <EntityType Name="TblRestrurantHeaders">
           <Key>
             <PropertyRef Name="intRestrurantId" />
           </Key>
@@ -30,7 +30,7 @@
           <Property Name="strRestrurantType" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="TblRestrurantRow">
+        <EntityType Name="TblRestrurantRows">
           <Key>
             <PropertyRef Name="intRowId" />
           </Key>
@@ -40,32 +40,39 @@
           <Property Name="intRestrurantId" Type="bigint" Nullable="false" />
           <Property Name="intEmployeeId" Type="bigint" />
           <Property Name="IsCollectReqest" Type="bit" />
-          <Property Name="DteCollectionTimeLeft" Type="date" />
+          <Property Name="DteCollectionTimeLeft" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
-        <EntityType Name="tblUser">
+        <EntityType Name="tblUsers">
           <Key>
             <PropertyRef Name="intUserID" />
           </Key>
           <Property Name="intUserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strUserType" Type="bigint" Nullable="false" />
           <Property Name="strUserName" Type="bigint" Nullable="false" />
-          <Property Name="intNgoID" Type="bigint" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="intNgoID" Type="bigint" Nullable="false" />
           <Property Name="strUserMail" Type="nvarchar" MaxLength="500" />
           <Property Name="strPassword" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityContainer Name="db_aa135e_ibos1234ModelStoreContainer">
-          <EntitySet Name="tblLog" EntityType="Self.tblLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblNgo" EntityType="Self.tblNgo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TblRestrurantHeader" EntityType="Self.TblRestrurantHeader" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TblRestrurantRow" EntityType="Self.TblRestrurantRow" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogs" EntityType="Self.tblLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNgoes" EntityType="Self.tblNgoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblRestrurantHeaders" EntityType="Self.TblRestrurantHeaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblRestrurantRows" EntityType="Self.TblRestrurantRows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_aa135e_ibos1234Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="db_aa135e_ibos1234Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblLogs" EntityType="db_aa135e_ibos1234Model.tblLog" />
+          <EntitySet Name="tblNgoes" EntityType="db_aa135e_ibos1234Model.tblNgo" />
+          <EntitySet Name="TblRestrurantHeaders" EntityType="db_aa135e_ibos1234Model.TblRestrurantHeader" />
+          <EntitySet Name="TblRestrurantRows" EntityType="db_aa135e_ibos1234Model.TblRestrurantRow" />
+          <EntitySet Name="tblUsers" EntityType="db_aa135e_ibos1234Model.tblUser" />
+        </EntityContainer>
         <EntityType Name="tblLog">
           <Key>
             <PropertyRef Name="intAutoId" />
@@ -75,13 +82,20 @@
           <Property Name="intRowid" Type="Int64" />
           <Property Name="IntUserID" Type="Int64" />
         </EntityType>
+        <EntityType Name="tblNgo">
+          <Key>
+            <PropertyRef Name="intNgoId" />
+          </Key>
+          <Property Name="intNgoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strNgoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TblRestrurantHeader">
           <Key>
             <PropertyRef Name="intRestrurantId" />
           </Key>
           <Property Name="intRestrurantId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strRestrurantName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="strRestrurantType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="strRestrurantName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="strRestrurantType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TblRestrurantRow">
@@ -89,12 +103,12 @@
             <PropertyRef Name="intRowId" />
           </Key>
           <Property Name="intRowId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strFood" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="StrFoodType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="strFood" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StrFoodType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="intRestrurantId" Type="Int64" Nullable="false" />
           <Property Name="intEmployeeId" Type="Int64" />
           <Property Name="IsCollectReqest" Type="Boolean" />
-          <Property Name="DteCollectionTimeLeft" Type="DateTime" Precision="0" />
+          <Property Name="DteCollectionTimeLeft" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="tblUser">
@@ -109,21 +123,7 @@
           <Property Name="strUserMail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="db_aa135e_ibos1234Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblLogs" EntityType="Self.tblLog" />
-          <EntitySet Name="TblRestrurantHeaders" EntityType="Self.TblRestrurantHeader" />
-          <EntitySet Name="TblRestrurantRows" EntityType="Self.TblRestrurantRow" />
-          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <EntitySet Name="tblNgoes" EntityType="db_aa135e_ibos1234Model.tblNgo" />
-        </EntityContainer>
-        <EntityType Name="tblNgo">
-          <Key>
-            <PropertyRef Name="intNgoId" />
-          </Key>
-          <Property Name="intNgoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strNgoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -131,56 +131,56 @@
         <EntityContainerMapping StorageEntityContainer="db_aa135e_ibos1234ModelStoreContainer" CdmEntityContainer="db_aa135e_ibos1234Entities">
           <EntitySetMapping Name="tblLogs">
             <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblLog">
-              <MappingFragment StoreEntitySet="tblLog">
-                <ScalarProperty Name="intAutoId" ColumnName="intAutoId" />
-                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
-                <ScalarProperty Name="intRowid" ColumnName="intRowid" />
+              <MappingFragment StoreEntitySet="tblLogs">
                 <ScalarProperty Name="IntUserID" ColumnName="IntUserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblRestrurantHeaders">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantHeader">
-              <MappingFragment StoreEntitySet="TblRestrurantHeader">
+                <ScalarProperty Name="intRowid" ColumnName="intRowid" />
                 <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
-                <ScalarProperty Name="strRestrurantName" ColumnName="strRestrurantName" />
-                <ScalarProperty Name="strRestrurantType" ColumnName="strRestrurantType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblRestrurantRows">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantRow">
-              <MappingFragment StoreEntitySet="TblRestrurantRow">
-                <ScalarProperty Name="intRowId" ColumnName="intRowId" />
-                <ScalarProperty Name="strFood" ColumnName="strFood" />
-                <ScalarProperty Name="StrFoodType" ColumnName="StrFoodType" />
-                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
-                <ScalarProperty Name="intEmployeeId" ColumnName="intEmployeeId" />
-                <ScalarProperty Name="IsCollectReqest" ColumnName="IsCollectReqest" />
-                <ScalarProperty Name="DteCollectionTimeLeft" ColumnName="DteCollectionTimeLeft" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblUsers">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblUser">
-              <MappingFragment StoreEntitySet="tblUser">
-                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
-                <ScalarProperty Name="strUserMail" ColumnName="strUserMail" />
-                <ScalarProperty Name="intNgoID" ColumnName="intNgoID" />
-                <ScalarProperty Name="intUserID" ColumnName="intUserID" />
-                <ScalarProperty Name="strUserType" ColumnName="strUserType" />
-                <ScalarProperty Name="strUserName" ColumnName="strUserName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="intAutoId" ColumnName="intAutoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblNgoes">
             <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblNgo">
-              <MappingFragment StoreEntitySet="tblNgo">
+              <MappingFragment StoreEntitySet="tblNgoes">
                 <ScalarProperty Name="strNgoName" ColumnName="strNgoName" />
                 <ScalarProperty Name="intNgoId" ColumnName="intNgoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblRestrurantHeaders">
+            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantHeader">
+              <MappingFragment StoreEntitySet="TblRestrurantHeaders">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="strRestrurantType" ColumnName="strRestrurantType" />
+                <ScalarProperty Name="strRestrurantName" ColumnName="strRestrurantName" />
+                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblRestrurantRows">
+            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantRow">
+              <MappingFragment StoreEntitySet="TblRestrurantRows">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DteCollectionTimeLeft" ColumnName="DteCollectionTimeLeft" />
+                <ScalarProperty Name="IsCollectReqest" ColumnName="IsCollectReqest" />
+                <ScalarProperty Name="intEmployeeId" ColumnName="intEmployeeId" />
+                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
+                <ScalarProperty Name="StrFoodType" ColumnName="StrFoodType" />
+                <ScalarProperty Name="strFood" ColumnName="strFood" />
+                <ScalarProperty Name="intRowId" ColumnName="intRowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
+                <ScalarProperty Name="strUserMail" ColumnName="strUserMail" />
+                <ScalarProperty Name="intNgoID" ColumnName="intNgoID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="strUserName" ColumnName="strUserName" />
+                <ScalarProperty Name="strUserType" ColumnName="strUserType" />
+                <ScalarProperty Name="intUserID" ColumnName="intUserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

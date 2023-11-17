@@ -26,9 +26,9 @@ namespace Zero_Hunger_Industry_Standard.Models
         }
     
         public virtual DbSet<tblLog> tblLogs { get; set; }
+        public virtual DbSet<tblNgo> tblNgoes { get; set; }
         public virtual DbSet<TblRestrurantHeader> TblRestrurantHeaders { get; set; }
         public virtual DbSet<TblRestrurantRow> TblRestrurantRows { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
-        public virtual DbSet<tblNgo> tblNgoes { get; set; }
     }
 }
