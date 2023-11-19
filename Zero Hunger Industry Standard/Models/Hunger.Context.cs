@@ -13,10 +13,10 @@ namespace Zero_Hunger_Industry_Standard.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class db_aa135e_ibos1234Entities : DbContext
+    public partial class HungerEntities : DbContext
     {
-        public db_aa135e_ibos1234Entities()
-            : base("name=db_aa135e_ibos1234Entities")
+        public HungerEntities()
+            : base("name=HungerEntities")
         {
         }
     

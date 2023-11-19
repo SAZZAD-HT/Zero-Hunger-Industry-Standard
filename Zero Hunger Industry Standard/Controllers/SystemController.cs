@@ -14,18 +14,22 @@ namespace Zero_Hunger_Industry_Standard.Controllers
     public class RestrurantController : Controller
     {
         // GET: Restrurant
-        public readonly IRestrurantService ress;
-        private readonly db_aa135e_ibos1234Entities _context;
+       
+        private readonly HungerEntities _context;
+
+        public RestrurantController()
+        {
+            _context = new HungerEntities(); // Initialize your DbContext here
+        }
         public ActionResult Index()
         {
             return View();
         }
         [HttpGet]
-        public async  Task<ActionResult> GetRestrurantDetails(long RestrurantId) 
+        public async  Task<ActionResult> GetRestrurantDetails(long? RestrurantId) 
         {
 
-            RestrurantDto data = await (from hed in _context.TblRestrurantHeaders
-                              join row in _context.TblRestrurantRows on hed.intRestrurantId equals row.intRestrurantId
+            RestrurantDto data = await (from hed in _context.TblRestrurantHeaders                           
                               where hed.IsActive == true
                               select new RestrurantDto
                               {
@@ -48,7 +52,6 @@ namespace Zero_Hunger_Industry_Standard.Controllers
 
             return View(data);        
         }
-
 
         [HttpPost]
         public async Task<ActionResult> CreateUpdateDeleteRestrurant(RestrurantDto restrurant)
@@ -93,6 +96,10 @@ namespace Zero_Hunger_Industry_Standard.Controllers
 
             
         }
+
+
+
+
         [HttpPost]
         public async Task<ActionResult> OpenCollectionRequestForm(RestrurantDto restrurant)
         {

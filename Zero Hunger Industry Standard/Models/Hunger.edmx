@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="db_aa135e_ibos1234Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HungerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblLogs">
           <Key>
             <PropertyRef Name="intAutoId" />
@@ -55,24 +55,18 @@
           <Property Name="strUserMail" Type="nvarchar" MaxLength="500" />
           <Property Name="strPassword" Type="nvarchar" MaxLength="500" />
         </EntityType>
-        <EntityContainer Name="db_aa135e_ibos1234ModelStoreContainer">
+        <EntityContainer Name="HungerModelStoreContainer">
           <EntitySet Name="tblLogs" EntityType="Self.tblLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblNgoes" EntityType="Self.tblNgoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblRestrurantHeaders" EntityType="Self.TblRestrurantHeaders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblRestrurantRows" EntityType="Self.TblRestrurantRows" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="db_aa135e_ibos1234Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="db_aa135e_ibos1234Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblLogs" EntityType="db_aa135e_ibos1234Model.tblLog" />
-          <EntitySet Name="tblNgoes" EntityType="db_aa135e_ibos1234Model.tblNgo" />
-          <EntitySet Name="TblRestrurantHeaders" EntityType="db_aa135e_ibos1234Model.TblRestrurantHeader" />
-          <EntitySet Name="TblRestrurantRows" EntityType="db_aa135e_ibos1234Model.TblRestrurantRow" />
-          <EntitySet Name="tblUsers" EntityType="db_aa135e_ibos1234Model.tblUser" />
-        </EntityContainer>
+      <Schema Namespace="HungerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tblLog">
           <Key>
             <PropertyRef Name="intAutoId" />
@@ -87,15 +81,15 @@
             <PropertyRef Name="intNgoId" />
           </Key>
           <Property Name="intNgoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strNgoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="strNgoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="TblRestrurantHeader">
           <Key>
             <PropertyRef Name="intRestrurantId" />
           </Key>
           <Property Name="intRestrurantId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strRestrurantName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="strRestrurantType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="strRestrurantName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="strRestrurantType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TblRestrurantRow">
@@ -103,8 +97,8 @@
             <PropertyRef Name="intRowId" />
           </Key>
           <Property Name="intRowId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strFood" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StrFoodType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="strFood" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StrFoodType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="intRestrurantId" Type="Int64" Nullable="false" />
           <Property Name="intEmployeeId" Type="Int64" />
           <Property Name="IsCollectReqest" Type="Boolean" />
@@ -123,64 +117,71 @@
           <Property Name="strUserMail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="strPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        </Schema>
+        <EntityContainer Name="HungerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblLogs" EntityType="Self.tblLog" />
+          <EntitySet Name="tblNgoes" EntityType="Self.tblNgo" />
+          <EntitySet Name="TblRestrurantHeaders" EntityType="Self.TblRestrurantHeader" />
+          <EntitySet Name="TblRestrurantRows" EntityType="Self.TblRestrurantRow" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="db_aa135e_ibos1234ModelStoreContainer" CdmEntityContainer="db_aa135e_ibos1234Entities">
+        <EntityContainerMapping StorageEntityContainer="HungerModelStoreContainer" CdmEntityContainer="HungerEntities">
           <EntitySetMapping Name="tblLogs">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblLog">
+            <EntityTypeMapping TypeName="HungerModel.tblLog">
               <MappingFragment StoreEntitySet="tblLogs">
-                <ScalarProperty Name="IntUserID" ColumnName="IntUserID" />
-                <ScalarProperty Name="intRowid" ColumnName="intRowid" />
-                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
                 <ScalarProperty Name="intAutoId" ColumnName="intAutoId" />
+                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
+                <ScalarProperty Name="intRowid" ColumnName="intRowid" />
+                <ScalarProperty Name="IntUserID" ColumnName="IntUserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblNgoes">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblNgo">
+            <EntityTypeMapping TypeName="HungerModel.tblNgo">
               <MappingFragment StoreEntitySet="tblNgoes">
-                <ScalarProperty Name="strNgoName" ColumnName="strNgoName" />
                 <ScalarProperty Name="intNgoId" ColumnName="intNgoId" />
+                <ScalarProperty Name="strNgoName" ColumnName="strNgoName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblRestrurantHeaders">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantHeader">
+            <EntityTypeMapping TypeName="HungerModel.TblRestrurantHeader">
               <MappingFragment StoreEntitySet="TblRestrurantHeaders">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="strRestrurantType" ColumnName="strRestrurantType" />
-                <ScalarProperty Name="strRestrurantName" ColumnName="strRestrurantName" />
                 <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
+                <ScalarProperty Name="strRestrurantName" ColumnName="strRestrurantName" />
+                <ScalarProperty Name="strRestrurantType" ColumnName="strRestrurantType" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblRestrurantRows">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.TblRestrurantRow">
+            <EntityTypeMapping TypeName="HungerModel.TblRestrurantRow">
               <MappingFragment StoreEntitySet="TblRestrurantRows">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DteCollectionTimeLeft" ColumnName="DteCollectionTimeLeft" />
-                <ScalarProperty Name="IsCollectReqest" ColumnName="IsCollectReqest" />
-                <ScalarProperty Name="intEmployeeId" ColumnName="intEmployeeId" />
-                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
-                <ScalarProperty Name="StrFoodType" ColumnName="StrFoodType" />
-                <ScalarProperty Name="strFood" ColumnName="strFood" />
                 <ScalarProperty Name="intRowId" ColumnName="intRowId" />
+                <ScalarProperty Name="strFood" ColumnName="strFood" />
+                <ScalarProperty Name="StrFoodType" ColumnName="StrFoodType" />
+                <ScalarProperty Name="intRestrurantId" ColumnName="intRestrurantId" />
+                <ScalarProperty Name="intEmployeeId" ColumnName="intEmployeeId" />
+                <ScalarProperty Name="IsCollectReqest" ColumnName="IsCollectReqest" />
+                <ScalarProperty Name="DteCollectionTimeLeft" ColumnName="DteCollectionTimeLeft" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblUsers">
-            <EntityTypeMapping TypeName="db_aa135e_ibos1234Model.tblUser">
+            <EntityTypeMapping TypeName="HungerModel.tblUser">
               <MappingFragment StoreEntitySet="tblUsers">
-                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
-                <ScalarProperty Name="strUserMail" ColumnName="strUserMail" />
-                <ScalarProperty Name="intNgoID" ColumnName="intNgoID" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="strUserName" ColumnName="strUserName" />
-                <ScalarProperty Name="strUserType" ColumnName="strUserType" />
                 <ScalarProperty Name="intUserID" ColumnName="intUserID" />
+                <ScalarProperty Name="strUserType" ColumnName="strUserType" />
+                <ScalarProperty Name="strUserName" ColumnName="strUserName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="intNgoID" ColumnName="intNgoID" />
+                <ScalarProperty Name="strUserMail" ColumnName="strUserMail" />
+                <ScalarProperty Name="strPassword" ColumnName="strPassword" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

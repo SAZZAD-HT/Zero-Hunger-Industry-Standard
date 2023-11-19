@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Zero_Hunger_Industry_Standard.Dtos.RestrurantDto>
+﻿@model Zero_Hunger_Industry_Standard.Dtos.RestrurantDto
 
 @{
     ViewBag.Title = "GetRestrurantDetails";
@@ -6,46 +6,76 @@
 
 <h2>GetRestrurantDetails</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.intRestrurantId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.strRestrurantName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.strRestrurantType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th></th>
-    </tr>
+<div>
+    <h4>RestrurantDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div>
+            <h4>RestrurantDto</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <!-- Display main properties of RestrurantDto -->
+                <dt>
+                    @Html.DisplayNameFor(model => model.intRestrurantId)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.intRestrurantId)
+                </dd>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.intRestrurantId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.strRestrurantName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.strRestrurantType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+                <dt>
+                    @Html.DisplayNameFor(model => model.strRestrurantName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.strRestrurantName)
+                </dd>
 
-</table>
+                <dt>
+                    @Html.DisplayNameFor(model => model.strRestrurantType)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.strRestrurantType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
+            </dl>
+
+            <!-- Display information about each food item -->
+            <h4>Food Items</h4>
+            <table class="table">
+                <tr>
+                    <th>Food</th>
+                    <th>Food Type</th>
+                    <th>Row ID</th>
+                    <th>Employee ID</th>
+                    <th>Is Collect Request</th>
+                    <th>Collection Time Left</th>
+                   <th>Action</th>
+                </tr>
+                @foreach (var item in Model.restrurantFoods)
+                {
+                    <tr>
+                        <td>@item.strFood</td>
+                        <td>@item.StrFoodType</td>
+                        <td>@item.intRowId</td>
+                        <td>@item.intEmployeeId</td>
+                        <td>@(item.IsCollectReqest == false|| item.IsCollectReqest == null ? "Pending" : "Collected")</td>
+                        <td>@item.DteCollectionTimeLeft</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit Food", new { /* id = Model.PrimaryKey */ })
+                            @Html.ActionLink("Edit", "Delete Food", new { /* id = Model.PrimaryKey */ })
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
