@@ -28,7 +28,14 @@ namespace Zero_Hunger_Industry_Standard.Dtos
 
 
     }
-    
+    public class RestrurantDDL
+    {
+        public long intRestrurantId { get; set; }
+        public string strRestrurantName { get; set; }
+        public string strRestrurantType { get; set; }
+     
+    }
 
-    
+
+
 }

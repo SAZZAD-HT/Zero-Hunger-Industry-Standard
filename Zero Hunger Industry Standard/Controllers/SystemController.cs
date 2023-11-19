@@ -53,7 +53,17 @@ namespace Zero_Hunger_Industry_Standard.Controllers
             return View(data);        
         }
 
-        [HttpPost]
+        [HttpGet]
+        public async Task<ActionResult> CreateUpdateDeleteRestrurant()
+        {
+
+            return View();
+         
+        
+        }
+
+
+     [HttpPost]
         public async Task<ActionResult> CreateUpdateDeleteRestrurant(RestrurantDto restrurant)
         {
 
@@ -66,7 +76,8 @@ namespace Zero_Hunger_Industry_Standard.Controllers
                     TblRestrurantHeader Res = new TblRestrurantHeader()
                     {
                         strRestrurantName = restrurant.strRestrurantName,
-                        strRestrurantType = restrurant.strRestrurantType
+                        strRestrurantType = restrurant.strRestrurantType,
+                        IsActive=true
                     };
                     _context.TblRestrurantHeaders.Add(Res);
                     await _context.SaveChangesAsync();
@@ -87,7 +98,7 @@ namespace Zero_Hunger_Industry_Standard.Controllers
 
                 }
 
-                return View(sub);
+                return RedirectToAction("GetRestrurantDetails");
             }
             catch (Exception ex)
             {
@@ -97,8 +108,34 @@ namespace Zero_Hunger_Industry_Standard.Controllers
             
         }
 
+        [HttpGet]
+        public async Task<ActionResult> OpenCollectionRequestFormLanding()
+        {
+            var data = await (from hed in _context.TblRestrurantHeaders
+                              where hed.IsActive == true
+                              select new RestrurantDDL
+                              {
+                                  intRestrurantId = hed.intRestrurantId,
+                                  strRestrurantName = hed.strRestrurantName,
+                                  strRestrurantType = hed.strRestrurantType,
+                              }).ToListAsync();
 
+            return View(data);
+        }
+        [HttpGet]
+        public async Task<ActionResult> DdlData()
+        {
+            var data = await (from hed in _context.TblRestrurantHeaders
+                              where hed.IsActive == true
+                              select new RestrurantDDL
+                              {
+                                  intRestrurantId = hed.intRestrurantId,
+                                  strRestrurantName = hed.strRestrurantName,
+                                  strRestrurantType = hed.strRestrurantType,
+                              }).ToListAsync();
 
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public async Task<ActionResult> OpenCollectionRequestForm(RestrurantDto restrurant)

@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Zero_Hunger_Industry_Standard.Dtos.RestrurantDDL>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenCollectionRequestFormLanding</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Open Collection Request Form Landing</h2>
+
+        <div class="form-group">
+            @Html.Label("Select Restaurant", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="restaurantDropdown" class="form-control">
+                    <option value="">Select Restaurant</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Restaurant ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("restaurantIdTextbox", "", new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Restaurant Type", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("restaurantTypeTextbox", "", new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Open Collection Request Form</h2>
+
+            <form>
+                <div class="form-group">
+                    <label for="strRestrurantName" class="control-label col-md-2">Restaurant Name</label>
+                    <div class="col-md-10">
+                        <input type="text" id="strRestrurantName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="strRestrurantType" class="control-label col-md-2">Restaurant Type</label>
+                    <div class="col-md-10">
+                        <input type="text" id="strRestrurantType" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="intRowId" class="control-label col-md-2">Row ID</label>
+                    <div class="col-md-10">
+                        <input type="text" id="intRowId" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="strFood" class="control-label col-md-2">Food</label>
+                    <div class="col-md-10">
+                        <input type="text" id="strFood" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="StrFoodType" class="control-label col-md-2">Food Type</label>
+                    <div class="col-md-10">
+                        <input type="text" id="StrFoodType" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="intRestrurantId" class="control-label col-md-2">Restaurant ID</label>
+                    <div class="col-md-10">
+                        <input type="text" id="intRestrurantId" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="intEmployeeId" class="control-label col-md-2">Employee ID</label>
+                    <div class="col-md-10">
+                        <input type="text" id="intEmployeeId" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="IsCollectReqest" class="control-label col-md-2">Is Collect Request</label>
+                    <div class="col-md-10">
+                        <input type="text" id="IsCollectReqest" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DteCollectionTimeLeft" class="control-label col-md-2">Collection Time Left</label>
+                    <div class="col-md-10">
+                        <input type="text" id="DteCollectionTimeLeft" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="IsActive" class="control-label col-md-2">Is Active</label>
+                    <div class="col-md-10">
+                        <input type="text" id="IsActive" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+
+
+
+            @*<div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>*@
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+
+            var globalData;
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/Restrurant/DdlData',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (responseData) {
+                        globalData = responseData;
+                        var dropdown = $('#restaurantDropdown');
+                        $.each(globalData, function (index, item) {
+                            dropdown.append($('<option></option>').val(item.intRestrurantId).text(item.strRestrurantName));
+                        });
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+                $('#restaurantDropdown').change(function () {
+                    var selectedRestaurant = $(this).val();
+                    var selectedRestaurantData = findRestaurantData(selectedRestaurant);
+                    console.log(selectedRestaurantData);
+                    if (selectedRestaurantData) {
+                        $('#restaurantIdTextbox').val(selectedRestaurantData.intRestrurantId);
+                        $('#restaurantTypeTextbox').val(selectedRestaurantData.strRestrurantType);
+                    } else {
+                        $('#restaurantIdTextbox').val('');
+                        $('#restaurantTypeTextbox').val('');
+                    }
+                });
+
+                function findRestaurantData(restaurantId) {
+                    return globalData.find(function (item) {
+                        return item.intRestrurantId === parseInt(restaurantId);
+                    });
+                }
+            });
+
+        </script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

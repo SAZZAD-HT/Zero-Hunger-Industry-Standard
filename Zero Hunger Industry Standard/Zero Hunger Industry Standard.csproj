@@ -250,6 +250,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Restrurant\GetRestrurantDetails.cshtml" />
     <Content Include="Views\Restrurant\CreateUpdateDeleteRestrurant.cshtml" />
+    <Content Include="Views\Restrurant\OpenCollectionRequestFormLanding.cshtml" />
+    <Content Include="Views\Restrurant\OpenCollectionRequestForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
